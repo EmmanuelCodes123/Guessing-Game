@@ -6,6 +6,7 @@ const prompt = document.getElementById("prompt");
 let highScoreValue = document.getElementById("highScore");
 const playAgain = document.getElementById("again")
 let guessNo = Math.round(Math.random()*20);
+let guessNumber;
 
 const message = ["Start guessing... ", "Too low", "Too high", "Almost there", "Really nigga"];
 const nearlyThere = ["Almost there", "Try again you almost got it", "Might be right this time"
@@ -13,7 +14,7 @@ const nearlyThere = ["Almost there", "Try again you almost got it", "Might be ri
 let score = 10;
 
 function runGuess() {
-  const guessNumber = guessNumberInput.value.trim();
+  guessNumber = guessNumberInput.value.trim();
   let randomQuote = Math.floor(Math.random()*nearlyThere.length)
 
   if (guessNumber == guessNo) {
@@ -27,9 +28,6 @@ function runGuess() {
       highScoreValue.innerText = score
     }
 
-    btn.addEventListener('click', () => {
-      prompt.innerText = "Pls start a new game";
-    })
     guessNumberInput.disabled = true;
 
   }
@@ -79,14 +77,13 @@ playAgain.addEventListener('click', () => {
   scoreValue.innerText = score
   playAgain.classList.remove("clickMe");
   guessNumberInput.disabled = false;
-  guessNo = Math.round(Math.random()*20)
+  guessNo = Math.round(Math.random()*20);
+  btn.addEventListener('click', runGuess)
   console.log(guessNo);
+
 })
 
 btn.addEventListener('click', runGuess)
 
 console.log(guessNo);
 
-document.addEventListener('keydown', (e) => {
-  console.log(e.key);
-})
